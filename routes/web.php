@@ -51,9 +51,16 @@ Route::get('/there',function() {
 	echo "This is there test";
 });
 
-Route::get('user/profile', function(){
+Route::get('/hello','TestController@abc');
+Route::post('/storevalues','TestController@store');
 
-})->name('profile');
+// Route::get('user/profile', function(){
+
+// })->name('profile');
+
+// Route::namespace('Admin')->group(function(){
+// 	// Controllers Within The "App\Http\Controllers\Admin" Namespace 
+// )}; 
 
 
 
