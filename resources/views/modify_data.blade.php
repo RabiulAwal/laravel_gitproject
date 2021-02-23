@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>Laravel Example</title>
-  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -11,13 +9,58 @@
 <body>
 
 <div class="container">
-  <h2>Create your store <span class="pull-right"><a class="btn btn-primary" href="{{ url('showData') }}">Show Data </a></span></h2>
-  <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{url('storevalues')}}">
+  <h2>Modify Data <span class="pull-right"><a class="btn btn-primary" href="{{ url('showData') }}">View Data </a></span></h2>
+
+  <div class="table-responsive">          
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Image</th>
+        <th>remember</th>
+        <th>created time</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <?php  
+          $counter = 1; 
+      ?>
+      @if($getdata != null)         
+        @foreach($getdata as $alldata)
+          <tr>
+            <td>{{ $counter++ }}</td>
+            <td>{{ $alldata->email  }}</td>
+            <td>{{ $alldata->pwd  }}</td>
+            <td>
+                @if(!empty($alldata->image)) 
+                  <img height="80" width="150" src="../images/{{ $alldata->image }}">
+                @else
+                  {{ '-' }}
+                @endif
+            </td>
+            <td>{{ ($alldata->remember == 1) ? 'Yes':'No'  }}</td>
+            <td>{{ $alldata->created_at->format('Y-m-d')  }}</td>
+          </tr>
+        @endforeach
+      @endif
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<?php //print"<pre>"; print_r($getdata);exit; ?>
+
+<div class="container">
+  <h2>Modify your store</h2>
+  <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{url('modifyvalues')}}">
     @csrf
     <div class="form-group">
       <label class="control-label col-sm-2" for="email">Email:</label>
       <div class="col-sm-10">
-        <input type="email" required="true" class="form-control" id="email" placeholder="Enter email" name="email">
+        <input type="email" value="" required="true" class="form-control" id="email" placeholder="Enter email" name="email">
       </div>
     </div>
     <div class="form-group">
@@ -48,6 +91,7 @@
     </div>
   </form>
 </div>
+
 
 </body>
 </html>

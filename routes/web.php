@@ -51,7 +51,12 @@ Route::get('/there',function() {
 	echo "This is there test";
 });
 
+
 Route::get('/hello','TestController@abc');
+Route::get('/showData','TestController@show');
+Route::get('/edit/{id}','TestController@edit');
+
+
 Route::post('/storevalues','TestController@store');
 
 // Route::get('user/profile', function(){

@@ -9,6 +9,6 @@ class Test extends Model
 {
 	use Notifiable;
     protected $fillable = [
-        'pwd','email',
+        'pwd','email','image',
     ];
 }
