@@ -46,7 +46,7 @@
             <td>{{ $alldata->created_at->format('Y-m-d')  }}</td>
             <td>  
                 <a class="btn btn-success btn-sm" href="{{ url('edit/'.$alldata->id) }}">Edit</a>
-                <a class="btn btn-danger btn-sm" href="">Delete</a>
+                <a class="btn btn-danger btn-sm" href="{{ url('delete/'.$alldata->id) }}">Delete</a>
             </td>
           </tr>
         @endforeach

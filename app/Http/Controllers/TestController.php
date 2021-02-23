@@ -8,9 +8,9 @@ use App\Test;
 
 class TestController extends Controller
 {
-   public function abc()
+  public function abc()
    {
-   		return view('form');
+      return view('form');
    }
 
    public function store(Request $requeststa)
@@ -36,12 +36,11 @@ class TestController extends Controller
         $requ->image = $imageName;  
 
    		$requ->save(); 
-        return redirect('showData');
-   		$success = "Store Successfully";           
-        return back()->with('success',$success);
+        return redirect('showData')->with('',);
+   		// $success = "Store Successfully";           
+     //    return back()->with('success',$success);
 
    }
-
 
    public function show()
    {
@@ -52,10 +51,41 @@ class TestController extends Controller
 
    public function edit($id)
    {
-      $getData = Test::where('id',$id)->get();
+      $getData = Test::where('id',$id)->firstOrFail();
+      //$getData = Test::find($id);
       return view('modify_data')->with('getdata', $getData);
       //print"<pre>"; print_r($getData);exit;
    }
+
+   public function update(Request $requeststa, $id)
+   {
+      $validated = $requeststa->validate([
+          'email' => 'required|string|email|unique:users,email',
+          'pwd' => 'required',
+      ]);
+
+      $getData            = Test::find($id);
+      $getData->email     = $requeststa->email;
+      $getData->pwd       = $requeststa->pwd;
+      $getData->image     = $requeststa->image;
+
+      if($requeststa->remember)
+      {
+        $getData->remember  = $requeststa->remember;
+      }
+
+      $getData->save(); 
+      return redirect()->back()->with('update Successfully');
+      // return redirect()->route('showData')->withSuccess('update Successfully');
+
+   }
+
+  public function destroy($id)
+  {
+      $getdata = Test::find($id)->delete();
+      return back()->with('message','Student Deleted Successfull !');
+  }
+
 
 
 }

@@ -30,7 +30,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="image">Image Upload:</label>
       <div class="col-sm-10">
-        <input required="true" name="image" multiple="true" type="file">
+        <input required="true" name="image" type="file">
       </div>
     </div>
 

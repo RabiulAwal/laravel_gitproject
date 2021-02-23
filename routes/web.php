@@ -54,7 +54,10 @@ Route::get('/there',function() {
 
 Route::get('/hello','TestController@abc');
 Route::get('/showData','TestController@show');
+
 Route::get('/edit/{id}','TestController@edit');
+Route::get('/delete/{id}','TestController@destroy');
+Route::post('/modifyvalues/{id}','TestController@update');
 
 
 Route::post('/storevalues','TestController@store');
