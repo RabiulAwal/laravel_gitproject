@@ -22,7 +22,7 @@ class TestController extends Controller
 	    ]);
         //print"<pre>"; print_r($validated);exit; 
 
-	   	$requ 			= new Test; 
+	   	$requ 			  = new Test; 
    		$requ->email 	= $requeststa->email;
    		$requ->pwd 		= $requeststa->pwd;
    		if($requeststa->remember)
@@ -36,7 +36,7 @@ class TestController extends Controller
         $requ->image = $imageName;  
 
    		$requ->save(); 
-        return redirect('showData')->with('',);
+        return redirect('showData')->with('success','Save Successfully');
    		// $success = "Store Successfully";           
      //    return back()->with('success',$success);
 
@@ -85,7 +85,6 @@ class TestController extends Controller
       $getdata = Test::find($id)->delete();
       return back()->with('message','Student Deleted Successfull !');
   }
-
 
 
 }
